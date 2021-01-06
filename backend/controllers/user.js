@@ -1,5 +1,6 @@
+const bcrypt = require('bcrypt');/*cryptage mdp*/
+const jwt = require('jsonwebtoken');/*package pour créer les tokens et les vérifier*/
 const user = require('../models/user');
-const bcrypt = require('bcrypt');
 
 /*---------------enregistrement des utilisateurs---------------*/
 exports.signup = (req, res, next) => {
@@ -32,7 +33,11 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({/*si le mdp est true*/
             userId: user._id,
-            token: 'TOKEN'
+            token: jwt.sign(/*3 arguments demandés*/
+              { userId: user._id },/*correspondance de l'id utilisateur*/
+              'RANDOM_TOKEN_SECRET',/*le token*/
+              { expiresIn: '24h' }/*expiration du token de 24h*/
+            )
           });
         })
         .catch(error => res.status(500).json({ error }));/*erreur serveur*/
