@@ -1,7 +1,8 @@
 const user = require('../models/user');
 const bcrypt = require('bcrypt');
 
-exports.signup = (req, res, next) => { /*enregistrement des utilisateurs*/
+/*---------------enregistrement des utilisateurs---------------*/
+exports.signup = (req, res, next) => {
 
   bcrypt.hash(req.body.password, 10) /*fonction pour crypter le mdp*/
     .then(hash => {
@@ -16,6 +17,25 @@ exports.signup = (req, res, next) => { /*enregistrement des utilisateurs*/
     .catch(error => res.status(500).json({ error }));/*500 erreur serveur*/
 };
 
-exports.login = (req, res, next) => {/*connecter les utilisateurs existants*/
+/*---------------connecter les utilisateurs existants---------------*/
+exports.login = (req, res, next) => {
 
+ User.findOne({ email: req.body.email })/*trouver l'utilisateur pour qui l'adresse mail correspond dans la base de données*/
+    .then(user => {
+      if (!user) {/*Si on ne trouve pas d'utilisateur erreur 401*/
+        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+      }
+      bcrypt.compare(req.body.password, user.password)/*comparer le mdp envoyer avec la requête par le mdp en hash enregistré*/
+        .then(valid => {
+          if (!valid) {
+            return res.status(401).json({ error: 'Mot de passe incorrect !' });/*si le mdp est false*/
+          }
+          res.status(200).json({/*si le mdp est true*/
+            userId: user._id,
+            token: 'TOKEN'
+          });
+        })
+        .catch(error => res.status(500).json({ error }));/*erreur serveur*/
+    })
+    .catch(error => res.status(500).json({ error }));/*erreur serveur*/
 };
