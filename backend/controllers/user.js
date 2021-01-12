@@ -1,11 +1,12 @@
 const bcrypt = require('bcrypt');/*cryptage mdp*/
 const jwt = require('jsonwebtoken');/*package pour créer les tokens et les vérifier*/
-const user = require('../models/user');
+
+const User = require('../models/user');
 
 /*---------------enregistrement des utilisateurs---------------*/
 exports.signup = (req, res, next) => {
 
-  bcrypt.hash(req.body.password, 10) /*fonction pour crypter le mdp*/
+  bcrypt.hash(req.body.password, 10) /*fonction pour crypter le mdp avec 10tours*/
     .then(hash => {
       const user = new User({ /*nouvel uilisateur*/
         email: req.body.email,

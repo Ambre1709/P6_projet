@@ -1,7 +1,7 @@
-const http = require('http');
-const app = require('./app');
+const http = require('http');/*Importation package http de Node*/
+const app = require('./app');/*Importation application Express*/
 
-const normalizePort = val => {
+const normalizePort = val => {/*normalizePort > renvoie un port valide*/
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -12,6 +12,7 @@ const normalizePort = val => {
   }
   return false;
 };
+
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
