@@ -1,7 +1,7 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
-exports.createThing = (req, res, next) => {/*Créatin d'un objet*/
+exports.createSauce = (req, res, next) => {/*Créatin d'un objet*/
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   const sauce = new Sauce({
@@ -53,7 +53,7 @@ exports.getOneSauce = (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 }
 
-exports.getAllSauce = (req, res, next) => {
+exports.getAllSauces = (req, res, next) => {
   Sauce.find()/*find > renvoyer un tableau contenant toutes les Sauces dans notre base de données*/
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({ error }));
