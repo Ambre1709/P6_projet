@@ -7,7 +7,7 @@ const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 /*Connexion MongoDB*/
-mongoose.connect('mongodb+srv://Ambre1709:mdp35@cluster0.ljqsd.mongodb.net/Cluster0?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Ambre1709:<password>@cluster0.ljqsd.mongodb.net/Cluster0?retryWrites=true&w=majority',/*comment cacher le mdp vu que le repo est public*/
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
