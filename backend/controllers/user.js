@@ -27,10 +27,10 @@ exports.login = (req, res, next) => {
       if (!user) {/*Si on ne trouve pas d'utilisateur erreur 401*/
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
-      bcrypt.compare(req.body.password, user.password)/*comparer le mdp envoyer avec la requête par le mdp en hash enregistré*/
+      bcrypt.compare(req.body.password, user.password)/*comparer le mot de passe entré par l'utilisateur avec le hash enregistré dans la base de données*/
         .then(valid => {
           if (!valid) {
-            return res.status(401).json({ error: 'Mot de passe incorrect !' });/*si le mdp est false*/
+            return res.status(401).json({ error: 'Mot de passe incorrect !' });/*si le mdp ne correspond pas*/
           }
           res.status(200).json({/*si le mdp est true*/
             userId: user._id,
