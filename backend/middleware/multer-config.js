@@ -17,4 +17,14 @@ const storage = multer.diskStorage({/*enregistrer sur le disque*/
   }
 });
 
+const fileFilter = (req, file, callback) => {// on crée un filtre sur le type d'image accepté
+    const extension = MIME_TYPES[file.mimetype]; 
+    if (extension === 'jpg' || extension === 'png') {
+        callback (null, true);
+        
+    } else {
+        callback('Erreur : Mauvais type de fichier', false); // erreur si le fichier envoyé est différent de celui demandé
+    }
+};
+
 module.exports = multer({storage: storage}).single('image'); 
