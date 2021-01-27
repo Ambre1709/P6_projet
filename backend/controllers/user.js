@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');/*cryptage mdp*/
 const jwt = require('jsonwebtoken');/*package pour créer les tokens et les vérifier*/
-
 const User = require('../models/user');
+require('dotenv').config();
 
 /*---------------enregistrement des utilisateurs---------------*/
 exports.signup = (req, res, next) => {
