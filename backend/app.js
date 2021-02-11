@@ -5,10 +5,10 @@ et être capables d'extraire l'objet JSON de la demande.*/
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 require('dotenv').config()/*variable d'environnement*/
-const path = require('path');
+const path = require('path');/* pour travailler avec les chemins de fichiers et de répertoires*/
 
-const sauceRoutes = require('./routes/sauce');
-const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');// on récupère les routes pour la sauce
+const userRoutes = require('./routes/user');// on récupère les routes pour l'user
 
 /*Connexion MongoDB*/
 mongoose.connect(process.env.DB_MONGO_CONNECT,
@@ -39,4 +39,4 @@ app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
 
-module.exports = app;
+module.exports = app;/*export de l'application express pour le serveur node.js*/

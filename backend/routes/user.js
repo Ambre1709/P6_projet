@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express');// on récupère express pour créer un routeur
+const router = express.Router();// on créer le routeur
 const verifyPass = require('../middleware/passwordVerify');
 const userCtrl = require('../controllers/user');
 const bouncer = require ("express-bouncer")(60000, 300000, 5);/*contre le force brut, au bout de 5 tentatives = délai d'attente entre 1 min et 5 min*/

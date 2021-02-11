@@ -1,7 +1,7 @@
 const http = require('http');/*Importation package http de Node qui nous permet de créer le serveur*/
 const app = require('./app');/*Importation application Express*/
 
-const normalizePort = val => {/*normalizePort > renvoie un port valide*/
+const normalizePort = val => {/*fonction normalizePort > renvoie un port valide*/
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -14,7 +14,7 @@ const normalizePort = val => {/*normalizePort > renvoie un port valide*/
 };
 
 const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);/*set > definir le port que l'on va utiliser*/
+app.set('port', port);/*set > definir le port que l'on va utiliser pour l'app express*/
 
 const errorHandler = error => {/* recherche les différentes erreurs et les gère de manière appropriée. Elle est ensuite enregistrée dans le serveur*/
   if (error.syscall !== 'listen') {
@@ -45,4 +45,4 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-server.listen(port);
+server.listen(port);// configuration du serveur sur le port
