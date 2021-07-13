@@ -12,4 +12,3 @@
 #### 🔨 Divers
 * Création API REST
 * Sécurisez avec l'OWASP et le RGPD
-* Responsive Design
